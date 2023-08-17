@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.9.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    `maven-publish`
 }
 
 group = "cn.taskeren"
@@ -32,5 +33,23 @@ tasks.jar {
         attributes(
             "Main-Class" to "cn.taskeren.explode3.parser.cli.MainKt"
         )
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/Taskeren/explode3-chart-parser")
+            credentials {
+                username = project.findProperty("gpr.username")?.toString() ?: System.getenv("GPR_USERNAME")
+                password = project.findProperty("gpr.password")?.toString() ?: System.getenv("GPR_PASSWORD")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+        }
     }
 }
