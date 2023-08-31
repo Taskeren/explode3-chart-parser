@@ -14,7 +14,7 @@ internal class TestCMapParser {
 
 	@Test
 	fun testParse() {
-		val c = assertDoesNotThrow { CMapParser.parse(read("test.xml")) }
+		val c = assertDoesNotThrow { CMapParser.parse(read("test1.xml")) }
 
 		assertEquals(1312, c.noteCount)
 		assertContentEquals(emptyArray(), c.validate().toTypedArray())

@@ -20,5 +20,5 @@ data class CMapNoteAsset(
 	@JsonProperty("m_subId")
 	val subId: Int, // default -1
 	@JsonProperty("status")
-	val status: String,
+	val status: String?,
 )
